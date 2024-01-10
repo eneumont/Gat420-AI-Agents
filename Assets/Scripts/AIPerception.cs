@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class AIPerception : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] protected string TagName = "";
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract GameObject[] GameObjects();
 }

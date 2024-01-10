@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIAutonomousAGent : MonoBehaviour
+public class AIAutonomousAgent : AIAgent
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    public AIPerception perception = null;
+    void Update() {
+        var gameObjects = perception.GetGameObjects();
         
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for (var go in gameObjects) {
+            Debug.DrawLine(transform.position, go.transform.position);
+        }
     }
 }
