@@ -10,9 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 2465930151506680661}
   - component: {fileID: 8443355538115272320}
+  - component: {fileID: 4804766564009598198}
   - component: {fileID: 7934280554093229317}
   - component: {fileID: 4909584498258025228}
-  - component: {fileID: 4804766564009598198}
+  - component: {fileID: -1407148384666623255}
+  - component: {fileID: 7813566097768775510}
   m_Layer: 0
   m_Name: AutonomousAgent01
   m_TagString: Agent01
@@ -57,30 +59,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.42448837
   m_Center: {x: 0, y: 0.51407164, z: 0.02817142}
---- !u!114 &7934280554093229317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6609577113823052598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d374e6465e6d1fd48aaac849fbbe44af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &4909584498258025228
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6609577113823052598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91ed450d277eb68468ca551d8ee4438c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &4804766564009598198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +71,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3a61a8d7b4d1a428c779d6fad0e2c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movement: {fileID: 7934280554093229317}
+  seekPerception: {fileID: 4909584498258025228}
+  fleePerception: {fileID: -1407148384666623255}
+  flockPerception: {fileID: 7813566097768775510}
+--- !u!114 &7934280554093229317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6609577113823052598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d374e6465e6d1fd48aaac849fbbe44af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 5
+  minSpeed: 5
+  maxForce: 5
+  turnRate: 90
+--- !u!114 &4909584498258025228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6609577113823052598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ed450d277eb68468ca551d8ee4438c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagName: Agent02
+  distance: 10
+  maxAngle: 180
+--- !u!114 &-1407148384666623255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6609577113823052598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ed450d277eb68468ca551d8ee4438c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagName: Agent03
+  distance: 5
+  maxAngle: 270
+--- !u!114 &7813566097768775510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6609577113823052598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91ed450d277eb68468ca551d8ee4438c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagName: Agent01
+  distance: 50
+  maxAngle: 360
 --- !u!1001 &6050715635883143261
 PrefabInstance:
   m_ObjectHideFlags: 0

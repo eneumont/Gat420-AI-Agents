@@ -5,8 +5,8 @@ using UnityEngine;
 public abstract class AIMovement : MonoBehaviour {
 	[Range(1, 10)] public float maxSpeed = 5;
 	[Range(1, 10)] public float minSpeed = 5;
-	[Range(1, 10)] public float maxForce = 5;
-	[Range(1, 100)] public float turnRate = 90;
+	[Range(1, 100)] public float maxForce = 5;
+	[Range(1, 360)] public float turnRate = 90;
 
 	public virtual Vector3 Velocity { get; set; } = Vector3.zero;
 	public virtual Vector3 Acceleration { get; set; } = Vector3.zero;

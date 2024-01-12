@@ -17,6 +17,18 @@ public class AIKinematicMovement : AIMovement {
 	}
 
 	public override void Resume() {
-		throw new System.NotImplementedException();
+		
+	}
+
+	void LateUpdate() {
+		Velocity += Acceleration * Time.deltaTime;
+		Velocity = Vector3.ClampMagnitude(Velocity, maxSpeed);
+		transform.position += Velocity * Time.deltaTime;
+
+		if (Velocity.sqrMagnitude > 0.1f) {
+			transform.rotation = Quaternion.LookRotation(Velocity);
+		}
+
+		Acceleration = Vector3.zero;
 	}
 }

@@ -20,6 +20,6 @@ public class AIDistancePerception : AIPerception {
             }
         }
 
-        return result.ToArray();//tweak???
+        return result.ToArray();
     }
 }
