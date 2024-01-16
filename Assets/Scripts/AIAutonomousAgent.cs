@@ -4,9 +4,10 @@ using TreeEditor;
 using UnityEngine;
 
 public class AIAutonomousAgent : AIAgent {
-    public AIPerception seekPerception = null;
-    public AIPerception fleePerception = null;
-    public AIPerception flockPerception = null;
+    [SerializeField] AIPerception seekPerception = null;
+    [SerializeField] AIPerception fleePerception = null;
+    [SerializeField] AIPerception flockPerception = null;
+    [SerializeField] AIPerception obstaclePerception = null;
     void Update() {
         //seek
         if (seekPerception != null) {
@@ -33,6 +34,25 @@ public class AIAutonomousAgent : AIAgent {
 				movement.ApplyForce(Alignment(gameObjects));
 			}
 		}
+
+		//obstacle
+		{
+			if (obstaclePerception != null) {
+				if(((AIRaycastPerception)obstaclePerception).CheckDirection(Vector3.forward)) {
+					Vector3 open = Vector3.zero;
+					if (((AIRaycastPerception)obstaclePerception).GetOpenDirection(ref open)) {
+						movement.ApplyForce(GetSteeringForce(open) * 5);
+					}
+				}
+				var gameObjects = obstaclePerception.GetGameObjects();
+			}
+			
+		}
+
+		// cancel y movement
+		Vector3 acceleration = movement.Acceleration;
+		acceleration.y = 0;
+		movement.Acceleration = acceleration;
 
 		transform.position = Utilities.Wrap(transform.position, new Vector3(-10, -10, -10), new Vector3(10, 10, 10));
     }
