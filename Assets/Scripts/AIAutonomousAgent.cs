@@ -38,13 +38,21 @@ public class AIAutonomousAgent : AIAgent {
 		//obstacle
 		{
 			if (obstaclePerception != null) {
-				if(((AIRaycastPerception)obstaclePerception).CheckDirection(Vector3.forward)) {
-					Vector3 open = Vector3.zero;
-					if (((AIRaycastPerception)obstaclePerception).GetOpenDirection(ref open)) {
-						movement.ApplyForce(GetSteeringForce(open) * 5);
-					}
-				}
-				var gameObjects = obstaclePerception.GetGameObjects();
+				//if(((AIRaycastPerception)obstaclePerception).CheckDirection(Vector3.forward)) {
+				//	Vector3 open = Vector3.zero;
+				//	if (((AIRaycastPerception)obstaclePerception).GetOpenDirection(ref open)) {
+				//		movement.ApplyForce(GetSteeringForce(open) * 5);
+				//	}
+				//}
+                if (((AISpherecastPerception)obstaclePerception).CheckDirection(Vector3.forward))
+                {
+                    Vector3 open = Vector3.zero;
+                    if (((AISpherecastPerception)obstaclePerception).GetOpenDirection(ref open))
+                    {
+                        movement.ApplyForce(GetSteeringForce(open) * 5);
+                    }
+                }
+                var gameObjects = obstaclePerception.GetGameObjects();
 			}
 			
 		}
