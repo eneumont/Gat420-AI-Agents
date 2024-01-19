@@ -93,7 +93,7 @@ MonoBehaviour:
   maxSpeed: 5
   minSpeed: 5
   maxForce: 5
-  turnRate: 90
+  turnRate: 180
 --- !u!114 &4909584498258025228
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,8 +161,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagName: 
-  distance: 5
-  maxAngle: 80
+  distance: 3
+  maxAngle: 180
   layerMask:
     serializedVersion: 2
     m_Bits: 64

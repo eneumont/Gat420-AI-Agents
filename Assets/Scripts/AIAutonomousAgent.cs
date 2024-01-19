@@ -44,17 +44,14 @@ public class AIAutonomousAgent : AIAgent {
 				//		movement.ApplyForce(GetSteeringForce(open) * 5);
 				//	}
 				//}
-                if (((AISpherecastPerception)obstaclePerception).CheckDirection(Vector3.forward))
-                {
+                if (((AISpherecastPerception)obstaclePerception).CheckDirection(Vector3.forward)) {
                     Vector3 open = Vector3.zero;
-                    if (((AISpherecastPerception)obstaclePerception).GetOpenDirection(ref open))
-                    {
+                    if (((AISpherecastPerception)obstaclePerception).GetOpenDirection(ref open)) {
                         movement.ApplyForce(GetSteeringForce(open) * 5);
                     }
                 }
                 var gameObjects = obstaclePerception.GetGameObjects();
 			}
-			
 		}
 
 		// cancel y movement
