@@ -166,7 +166,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  numRaycast: 15
+  numRaycast: 20
   radius: 1.5
 --- !u!54 &2471795191420061879
 Rigidbody:
