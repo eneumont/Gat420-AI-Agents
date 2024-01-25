@@ -26,7 +26,6 @@ public class NavNodeEditor : MonoBehaviour {
 		SceneView.duringSceneGui -= OnScene;
 	}
 
-
 	void OnScene(SceneView scene) {
 		if (!active) return;
 
@@ -66,13 +65,9 @@ public class NavNodeEditor : MonoBehaviour {
 		// add connection to active nav node
 		if (e.type == EventType.KeyUp && e.keyCode == KeyCode.Alpha1) {
 			if (activeNavNode != null && navNode != null && activeNavNode != navNode) {
-				if (!activeNavNode.neighbors.Contains(navNode)) {
-					activeNavNode.neighbors.Add(navNode);
-				}
-
-				if (!navNode.neighbors.Contains(activeNavNode))	{
-					navNode.neighbors.Add(activeNavNode);
-				}
+				if (!activeNavNode.neighbors.Contains(navNode)) activeNavNode.neighbors.Add(navNode);
+				
+				if (!navNode.neighbors.Contains(activeNavNode))	navNode.neighbors.Add(activeNavNode);
 			}
 			activeNavNode = null;
 		}
