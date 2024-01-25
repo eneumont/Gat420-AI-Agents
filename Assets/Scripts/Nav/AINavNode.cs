@@ -18,7 +18,7 @@ public class AINavNode : MonoBehaviour
 	private void OnTriggerEnter(Collider other) {
 		if (other.gameObject.TryGetComponent<AINavPath>(out AINavPath navPath)) {
 			if (navPath.targetNode == this) {
-				navPath.targetNode = GetRandomNeighbor();
+				navPath.targetNode = navPath.GetNextAINavNode(navPath.targetNode);
 			}
 		}
 	}
@@ -26,7 +26,7 @@ public class AINavNode : MonoBehaviour
 	private void OnTriggerStay(Collider other) {
 		if (other.gameObject.TryGetComponent<AINavPath>(out AINavPath navPath)) {
 			if (navPath.targetNode == this) {
-				navPath.targetNode = GetRandomNeighbor();
+				navPath.targetNode = navPath.GetNextAINavNode(navPath.targetNode);
 			}
 		}
 	}
