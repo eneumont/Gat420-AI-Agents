@@ -387,7 +387,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 136
-  active: 1
+  active: 0
 --- !u!1 &2059903381
 GameObject:
   m_ObjectHideFlags: 0
@@ -534,6 +534,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NavAgent01
       objectReference: {fileID: 0}
+    - target: {fileID: 4959999319600317404, guid: 08836c34083d19f4199b6c402f448a5e, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 1eb4c3ce05091544db2b9878bda20d19, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
