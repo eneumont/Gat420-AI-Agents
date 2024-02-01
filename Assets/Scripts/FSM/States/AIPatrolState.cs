@@ -19,5 +19,10 @@ public class AIPatrolState : AIState {
 
 	public override void onUpdate() {
 		agent.movement.MoveTowards(destination);
+		if (Vector3.Distance(agent.transform.position, destination) < 1) agent.stateMachine.SetState(nameof(AIIdleState));
+		var enemies = agent.enemyPerception.GetGameObjects();
+		if (enemies.Length > 0)	{
+			agent.stateMachine.SetState(nameof(AIChaseState));
+		}
 	}
 }
