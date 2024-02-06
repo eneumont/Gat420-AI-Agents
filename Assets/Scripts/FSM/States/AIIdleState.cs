@@ -21,7 +21,7 @@ public class AIIdleState : AIState {
 		if (Time.time > timer) agent.stateMachine.SetState(nameof(AIPatrolState));
 
 		var enemies = agent.enemyPerception.GetGameObjects();
-		if (enemies.Length > 0) { agent.stateMachine.SetState(nameof(AIAttackState)); }
+		if (enemies.Length > 0) { agent.stateMachine.SetState(nameof(AIChaseState)); }
 		Debug.Log("idle update");
 	}
 }

@@ -9,6 +9,7 @@ public class AIChaseState : AIState {
 	}
 
 	public override void onEnter() {
+		agent.movement.Resume();
 		initialSpeed = agent.movement.maxSpeed;
 		agent.movement.maxSpeed *= 2;
 	}

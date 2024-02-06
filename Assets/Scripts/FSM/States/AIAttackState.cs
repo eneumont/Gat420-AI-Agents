@@ -9,6 +9,8 @@ public class AIAttackState : AIState {
 	}
 
 	public override void onEnter() {
+		agent.movement.Stop();
+		agent.movement.Velocity = Vector3.zero;
 		agent.animator?.SetTrigger("attack");
 		timer = Time.time + 2;
 	}
