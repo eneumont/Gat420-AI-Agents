@@ -5,7 +5,14 @@ using UnityEngine;
 public class AIChaseState : AIState {
 	float initialSpeed;
 	public AIChaseState(AIStateAgent agent) : base(agent) {
+		AIStateTransition transition = new AIStateTransition(nameof(AIAttackState));
+		transition.AddCondition(new FloatCondition(agent.enemyDistance, Condition.Predicate.LESS, 1));
+		transition.AddCondition(new BoolCondition(agent.enemySeen));
+		transitions.Add(transition);
 
+		transition = new AIStateTransition(nameof(AIIdleState));
+		transition.AddCondition(new BoolCondition(agent.enemySeen, false));
+		transitions.Add(transition);
 	}
 
 	public override void onEnter() {
@@ -19,14 +26,6 @@ public class AIChaseState : AIState {
 	}
 
 	public override void onUpdate() {
-		var enemies = agent.enemyPerception.GetGameObjects();
-		if (enemies.Length > 0) {
-			var enemy = enemies[0];
-            if (Vector3.Distance(agent.transform.position, enemy.transform.position) < 1.25f ) {
-				agent.stateMachine.SetState(nameof(AIAttackState));
-			}
-        } else {
-			agent.stateMachine.SetState(nameof(AIIdleState));
-		}
+		if (agent.enemySeen) agent.movement.Destination = agent.enemy.transform.position;
 	}
 }

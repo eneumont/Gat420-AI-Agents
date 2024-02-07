@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class AIIdleState : AIState {
-	float timer;
 	public AIIdleState(AIStateAgent agent) : base(agent) {
+		AIStateTransition transition = new AIStateTransition(nameof(AIPatrolState));
+		transition.AddCondition(new FloatCondition(agent.timer, Condition.Predicate.LESS, 0));
+		transitions.Add(transition);
 
+		transition = new AIStateTransition(nameof(AIChaseState));
+		transition.AddCondition(new BoolCondition(agent.enemySeen));
+		transitions.Add(transition);
 	}
 
 	public override void onEnter() {
-		timer = Time.time + Random.Range(1, 2);
-
+		agent.movement.Stop();
+		agent.movement.Velocity = Vector3.zero;
+		agent.timer.value = Random.Range(1, 2);
 	}
 
 	public override void onExit() {
@@ -18,10 +24,6 @@ public class AIIdleState : AIState {
 	}
 
 	public override void onUpdate() {
-		if (Time.time > timer) agent.stateMachine.SetState(nameof(AIPatrolState));
 
-		var enemies = agent.enemyPerception.GetGameObjects();
-		if (enemies.Length > 0) { agent.stateMachine.SetState(nameof(AIChaseState)); }
-		Debug.Log("idle update");
 	}
 }

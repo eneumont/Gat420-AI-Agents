@@ -9,8 +9,10 @@ public class AIDeathState : AIState {
 	}
 
 	public override void onEnter() {
+		agent.movement.Stop();
+		agent.movement.Velocity = Vector3.zero;
 		agent.animator?.SetTrigger("death");
-		timer = Time.time + 2;
+		timer = Time.time + 5;
 	}
 
 	public override void onExit() {

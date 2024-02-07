@@ -17,6 +17,8 @@ public class AIStateAgent : AIAgent {
 	public AIStateMachine stateMachine = new AIStateMachine();
 	public AIStateAgent enemy { get; private set; }
 	void Start() {
+		health.value = 100;
+
 		//add states to state machine
 		stateMachine.addState(nameof(AIIdleState), new AIIdleState(this));
 		stateMachine.addState(nameof(AIDeathState), new AIDeathState(this));
@@ -43,6 +45,14 @@ public class AIStateAgent : AIAgent {
 		//from any state (health -> death)
 		if (health <= 0) stateMachine.SetState(nameof(AIDeathState));
 		animator?.SetFloat("speed", movement.Velocity.magnitude);
+
+		foreach (var transition in transitions) {
+			if (transition.ToTransition()) {
+				stateMachine.SetState(transition.nextState);
+				break;
+			}
+		}
+
 		stateMachine.Update();
 	}
 
