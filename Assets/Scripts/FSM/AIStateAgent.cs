@@ -46,7 +46,7 @@ public class AIStateAgent : AIAgent {
 		if (health <= 0) stateMachine.SetState(nameof(AIDeathState));
 		animator?.SetFloat("speed", movement.Velocity.magnitude);
 
-		foreach (var transition in transitions) {
+		foreach (var transition in stateMachine.currentState.transitions) {
 			if (transition.ToTransition()) {
 				stateMachine.SetState(transition.nextState);
 				break;
