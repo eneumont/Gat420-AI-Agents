@@ -1,11 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AIUtilityObject : MonoBehaviour
-{
+public class AIUtilityObject : MonoBehaviour {
 	[System.Serializable]
-	public class Effector
-	{
+	public class Effector {
 		public AIUtilityNeed.Type type;
 		[Range(-2, 2)] public float change;
 	}
@@ -26,8 +24,7 @@ public class AIUtilityObject : MonoBehaviour
 	AIUIMeter meter;
 	Dictionary<AIUtilityNeed.Type, float> registry = new Dictionary<AIUtilityNeed.Type, float>();
 
-	void Start()
-	{
+	void Start() {
 		// create meter ui at run-time
 		meter = Instantiate(meterPrefab, GameObject.Find("Canvas").transform);
 
@@ -37,22 +34,18 @@ public class AIUtilityObject : MonoBehaviour
 		meter.position = transform.position + meterOffset;
 
 		// set effectors array into dictionary
-		foreach (var effector in effectors) 
-		{
+		foreach (var effector in effectors) {
 			registry[effector.type] = effector.change;
 		}
 	}
 
-	private void Update()
-	{
+	private void Update() {
 		meter.visible = false;
 
 		// show object meter if near agent
 		var colliders = Physics.OverlapSphere(transform.position, radius, agentLayerMask);
-		if (colliders.Length > 0 ) 
-		{
-			if (colliders[0].TryGetComponent(out AIUtilityAgent agent))
-			{
+		if (colliders.Length > 0 ) {
+			if (colliders[0].TryGetComponent(out AIUtilityAgent agent)) {
 				float distance = 1 - Vector3.Distance(colliders[0].transform.position, transform.position) / radius;
 				score = agent.GetUtilityScore(this);
 				meter.alpha = Mathf.Max(0.5f, score * distance);
@@ -61,19 +54,16 @@ public class AIUtilityObject : MonoBehaviour
 		}
 	}
 
-	void LateUpdate()
-	{
+	void LateUpdate() {
 		meter.value = score;
 		meter.position = transform.position + meterOffset;
 	}
 
-	public float GetNeedChange(AIUtilityNeed.Type type)
-	{
+	public float GetNeedChange(AIUtilityNeed.Type type) {
 		return registry.TryGetValue(type, out float value) ? value : 0f;
 	}
 
-	public bool HasNeedType(AIUtilityNeed.Type type)
-	{
+	public bool HasNeedType(AIUtilityNeed.Type type) {
 		return registry.ContainsKey(type);
 	}
 }

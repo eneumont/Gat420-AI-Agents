@@ -21,11 +21,14 @@ public class AIUtilityAgent : AIAgent {
 	public float happiness {
 		get {
 			// Total up total motives (desires) of all needs
-
-			// Calculate happiness level based on the average fulfillment of needs
-			// The lower the total motives (desires), the happier the agent
-			// If the agent has a high amount of desires then they are unhappy (unfulfilled)
-			return 0; // 1 - (divide total motives by number of needs to get average)
+			float totalMotives = 0;
+            foreach (var need in needs) {
+				totalMotives += need.motive;
+            }
+            // Calculate happiness level based on the average fulfillment of needs
+            // The lower the total motives (desires), the happier the agent
+            // If the agent has a high amount of desires then they are unhappy (unfulfilled)
+            return 1 - totalMotives / needs.Length; // 1 - (divide total motives by number of needs to get average)
 		}
 	}
 
@@ -48,13 +51,16 @@ public class AIUtilityAgent : AIAgent {
 			// get utility objects
 			var utilityObjects = gameObjects.GetComponents<AIUtilityObject>();
 
-			// ** set active utility object to utility object with the hightest score **
-			// iterate through utility objects
-			//		if utility score is > score threshold and score is higher than currect active utility object
-			//			set active utility object to utility object
+            // ** set active utility object to utility object with the hightest score **
+            foreach (var item in utilityObjects) {
+                item.score = GetUtilityScore(item);
+				if (item.score > scoreThreshold && (activeUtilityObject == null || item.score > activeUtilityObject.score)) {
+					activeUtilityObject = item;
+				}
+            }
 
-			// start active utility object usage
-			if (activeUtilityObject != null) {
+            // start active utility object usage
+            if (activeUtilityObject != null) {
 				StartCoroutine(UseUtilityCR(activeUtilityObject));
 			}
 		}
@@ -66,15 +72,20 @@ public class AIUtilityAgent : AIAgent {
 
 	IEnumerator UseUtilityCR(AIUtilityObject utilityObject) {
 		// move to utility position
-		
+		movement.MoveTowards(utilityObject.transform.position);
+
 		// wait until at destination position
-		
+		yield return new WaitUntil(() => Vector3.Distance(transform.position, movement.Destination) < 1);
+
 		// play animation
+		animator.SetBool(utilityObject.animationName, true);
 		
 		// wait duration
-		
+		yield return new WaitForSeconds(utilityObject.duration);
+
 		// stop animation
-		
+		animator.SetBool(utilityObject.animationName, false);
+
 		// apply utility
 		ApplyUtility(utilityObject);
 
@@ -84,13 +95,13 @@ public class AIUtilityAgent : AIAgent {
 		yield return null;
 	}
 
-
 	void ApplyUtility(AIUtilityObject utilityObject) {
 		foreach (var effector in utilityObject.effectors) {
 			AIUtilityNeed need = GetNeedByType(effector.type);
 			if (need == null) continue;
 
 			// apply effector change to input
+			need.input += effector.change;
 		}
 	}
 
