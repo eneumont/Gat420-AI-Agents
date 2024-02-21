@@ -42,6 +42,10 @@ public class AIUtilityNeed : MonoBehaviour {
 		meter.text = type.ToString();
 	}
 
+	void Start() {
+		input = initalInput;
+	}
+
 	void Update() {
 		input = input - ((1 / decayRate) * Time.deltaTime);
 		meter.value = 1 - motive;
