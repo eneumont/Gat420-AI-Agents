@@ -68,6 +68,8 @@ public class AIUtilityAgent : AIAgent {
 
 	private void LateUpdate() {
 		meter.value = happiness;
+		print(happiness);
+		if (happiness < 0.3) animator.SetBool("Happy", false); else animator.SetBool("Happy", true);
 	}
 
 	IEnumerator UseUtilityCR(AIUtilityObject utilityObject) {
